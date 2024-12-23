@@ -1,0 +1,44 @@
+- pipeline: "Build run deploy"
+  events:
+  - type: "PUSH"
+    refs:
+    - ":default"
+  fail_on_prepare_env_warning: true
+  resources: "X2LARGE"
+  actions:
+  - action: "pip install pyTelegramBotAPI"
+    type: "BUILD"
+    docker_image_name: "library/python"
+    docker_image_tag: "3.13"
+    execute_commands:
+    - "pip install pyTelegramBotAPI"
+    cached_dirs:
+    - "/root/.cache/pip"
+    shell: "BASH"
+  - action: "pip install pymongo python-telegram-bot pyTelegramBotAPI certifi"
+    type: "BUILD"
+    docker_image_name: "library/python"
+    docker_image_tag: "3.13"
+    execute_commands:
+    - "pip install pymongo python-telegram-bot pyTelegramBotAPI certifi"
+    cached_dirs:
+    - "/root/.cache/pip"
+    shell: "BASH"
+  - action: "chmod +x *"
+    type: "BUILD"
+    docker_image_name: "library/python"
+    docker_image_tag: "3.13"
+    execute_commands:
+    - "chmod +x *"
+    cached_dirs:
+    - "/root/.cache/pip"
+    shell: "BASH"
+  - action: "python3 GOD.py"
+    type: "BUILD"
+    docker_image_name: "library/python"
+    docker_image_tag: "3.13"
+    execute_commands:
+    - "python3 GOD.py"
+    cached_dirs:
+    - "/root/.cache/pip"
+    shell: "BASH"
