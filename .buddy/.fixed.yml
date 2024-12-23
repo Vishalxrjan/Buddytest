@@ -1,4 +1,4 @@
-- pipeline: "Build run deploy"
+- pipeline: "Build run deploy-2"
   events:
   - type: "PUSH"
     refs:
@@ -41,4 +41,4 @@
     - "python3 GOD.py"
     cached_dirs:
     - "/root/.cache/pip"
-    shell: "BASH"
+    execute_every_command: true
